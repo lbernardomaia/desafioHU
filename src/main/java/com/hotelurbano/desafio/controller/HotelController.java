@@ -2,6 +2,7 @@ package com.hotelurbano.desafio.controller;
 
 import com.hotelurbano.desafio.dto.BuscaAutoCompleteDTO;
 import com.hotelurbano.desafio.dto.BuscaDisponibilidadeDTO;
+import com.hotelurbano.desafio.dto.ResultadoBuscaAutoCompleteDTO;
 import com.hotelurbano.desafio.model.Hotel;
 import com.hotelurbano.desafio.service.HotelService;
 import org.springframework.beans.factory.InitializingBean;
@@ -17,22 +18,16 @@ public class HotelController implements InitializingBean {
     @Autowired
     private HotelService hotelService;
 
-    @RequestMapping(value="/buscaDisponibilidade",
-                    method = RequestMethod.POST,
-                    produces = "application/json",
-                    consumes = "application/json")
+    @RequestMapping(value="/buscaDisponibilidade", method = RequestMethod.POST)
     @ResponseBody
     public Collection<Hotel> buscaDisponibilidade(@RequestBody BuscaDisponibilidadeDTO buscaDisponibilidadeDTO) {
         return hotelService.buscarDisponibilidade(buscaDisponibilidadeDTO);
     }
 
-    @RequestMapping(value="/buscaAutoComplete",
-            method = RequestMethod.POST,
-            produces = "application/json",
-            consumes = "application/json")
+    @RequestMapping(value="/buscaAutoComplete", method = RequestMethod.POST)
     @ResponseBody
-    public Collection<BuscaAutoCompleteDTO> buscaAutoComplete(@RequestBody String busca) {
-        return hotelService.buscarParaAutoComplete("Araruama");
+    public Collection<ResultadoBuscaAutoCompleteDTO> buscaAutoComplete(@RequestBody BuscaAutoCompleteDTO buscaAutoCompleteDTO) {
+        return hotelService.buscarParaAutoComplete(buscaAutoCompleteDTO.getBusca());
     }
 
     @Override

@@ -1,13 +1,11 @@
 package com.hotelurbano.desafio.service;
 
-import com.hotelurbano.desafio.dao.HotelDAO;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 
 public class HotelServiceUnitTest {
 
-    @Mock
     private HotelService hotelService;
 
     @Before
@@ -33,5 +31,15 @@ public class HotelServiceUnitTest {
     @Test
     public void isMatches_caso4(){
         hotelService.isMatches("JaNeIrO", "rio de janeiro");
+    }
+
+    @Test
+    public void isMatches_caso5(){
+        hotelService.isMatches("JÁNêíó", "rio de janeiro");
+    }
+
+    @Test
+    public void isMatches_caso6(){
+       hotelService.isMatches("Sao Paulo", "São Paulo");
     }
 }

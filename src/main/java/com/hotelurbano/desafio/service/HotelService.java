@@ -1,14 +1,15 @@
 package com.hotelurbano.desafio.service;
 
 import com.hotelurbano.desafio.dao.HotelDAO;
-import com.hotelurbano.desafio.dto.BuscaAutoCompleteDTO;
 import com.hotelurbano.desafio.dto.BuscaDisponibilidadeDTO;
+import com.hotelurbano.desafio.dto.ResultadoBuscaAutoCompleteDTO;
 import com.hotelurbano.desafio.extensions.DateTimeExtensions;
 import com.hotelurbano.desafio.model.Hotel;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -21,51 +22,62 @@ public class HotelService {
     static Collection<String> cidadeDosHoteis = null;
     static Collection<String> hoteis = null;
 
-    public Collection<Hotel> buscarTodos(){
-        return hotelDAO.buscarTodos();
-    }
-
     public Collection<Hotel> buscarDisponibilidade(BuscaDisponibilidadeDTO buscaDisponibilidadeDTO){
-        DateTime dataInicioDateTime = DateTimeExtensions.StringToISODate(buscaDisponibilidadeDTO.getDataInicio());
-        DateTime dataFimDateTime = DateTimeExtensions.StringToISODate(buscaDisponibilidadeDTO.getDataFim());
-
-        return hotelDAO.buscarDisponibilidadePorCidade(buscaDisponibilidadeDTO.getBusca(),
-                dataInicioDateTime,
-                dataFimDateTime);
+        DateTime dataInicioDateTime = DateTimeExtensions.stringToISODate(buscaDisponibilidadeDTO.getDataInicio());
+        DateTime dataFimDateTime = DateTimeExtensions.stringToISODate(buscaDisponibilidadeDTO.getDataFim());
+        if (buscaDisponibilidadeDTO.getCidade()){
+            return hotelDAO.buscarDisponibilidadePorCidade(buscaDisponibilidadeDTO.getBusca(),
+                    dataInicioDateTime,
+                    dataFimDateTime);
+        }else if (buscaDisponibilidadeDTO.getHotel()){
+            return hotelDAO.buscarDisponibilidadePorHotel(buscaDisponibilidadeDTO.getBusca(),
+                    dataInicioDateTime,
+                    dataFimDateTime);
+        }else{
+            return new ArrayList<>();
+        }
     }
 
-    public Collection<BuscaAutoCompleteDTO> buscarParaAutoComplete(String busca){
-        int quantidadeElementosRecuperados = 0;
+    public Collection<ResultadoBuscaAutoCompleteDTO> buscarParaAutoComplete(String busca){
+        Collection<ResultadoBuscaAutoCompleteDTO> resultadosBuscaAutoCompleteDTO = new ArrayList<>();
 
-        Collection<BuscaAutoCompleteDTO> buscaAutoCompleteDTOs = new ArrayList<>();
+        pesquisarPorCidade(busca, resultadosBuscaAutoCompleteDTO);
+
+        pesquisarPorHotel(busca, resultadosBuscaAutoCompleteDTO);
+
+        return resultadosBuscaAutoCompleteDTO;
+    }
+
+    private void pesquisarPorCidade(String busca, Collection<ResultadoBuscaAutoCompleteDTO> resultadosBuscaAutoCompleteDTO) {
         for (String cidade : cidadeDosHoteis){
             if (isMatches(busca, cidade)){
-                BuscaAutoCompleteDTO buscaAutoCompleteDTO = preencherCidade(busca);
-                buscaAutoCompleteDTOs.add(buscaAutoCompleteDTO);
-                ++quantidadeElementosRecuperados;
-                if (isAtingiuMaximoElementos(quantidadeElementosRecuperados)){
+                ResultadoBuscaAutoCompleteDTO resultadoBuscaAutoCompleteDTO = preencherCidade(cidade);
+                resultadosBuscaAutoCompleteDTO.add(resultadoBuscaAutoCompleteDTO);
+                if (isAtingiuMaximoElementos(resultadosBuscaAutoCompleteDTO.size())){
                     break;
                 }
             }
         }
-
-        for (String hotel : hoteis){
-            if (isMatches(busca, hotel)){
-                BuscaAutoCompleteDTO buscaAutoCompleteDTO = preencherHotel(busca);
-                buscaAutoCompleteDTOs.add(buscaAutoCompleteDTO);
-                ++quantidadeElementosRecuperados;
-                if (isAtingiuMaximoElementos(quantidadeElementosRecuperados)){
-                    break;
-                }
-            }
-        }
-
-
-        return buscaAutoCompleteDTOs;
     }
 
-    protected boolean isMatches(String busca, String cidade) {
-        return cidade.matches("(?i)(.*)" + busca + "(.*)");
+    private void pesquisarPorHotel(String busca, Collection<ResultadoBuscaAutoCompleteDTO> resultadosBuscaAutoCompleteDTO) {
+        if (!isAtingiuMaximoElementos(resultadosBuscaAutoCompleteDTO.size())){
+            for (String hotel : hoteis){
+                if (isMatches(busca, hotel)){
+                    ResultadoBuscaAutoCompleteDTO resultadoBuscaAutoCompleteDTO = preencherHotel(hotel);
+                    resultadosBuscaAutoCompleteDTO.add(resultadoBuscaAutoCompleteDTO);
+                    if (isAtingiuMaximoElementos(resultadosBuscaAutoCompleteDTO.size())){
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    protected boolean isMatches(String buscaUsuario, String itemParaComparar) {
+        String buscaUsuarioNormalizada = Normalizer.normalize(buscaUsuario, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+        String itemParaCompararNormalizado = Normalizer.normalize(itemParaComparar, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+        return itemParaCompararNormalizado.matches("(?i)(.*)" + buscaUsuarioNormalizada + "(.*)");
     }
 
     public void popularCacheCidadeHoteis() {
@@ -78,18 +90,18 @@ public class HotelService {
         }
     }
 
-    private BuscaAutoCompleteDTO preencherCidade(String busca) {
-        BuscaAutoCompleteDTO buscaAutoCompleteDTO = new BuscaAutoCompleteDTO();
-        buscaAutoCompleteDTO.setBusca(busca);
-        buscaAutoCompleteDTO.setCidade(true);
-        return buscaAutoCompleteDTO;
+    private ResultadoBuscaAutoCompleteDTO preencherCidade(String busca) {
+        ResultadoBuscaAutoCompleteDTO resultadoBuscaAutoCompleteDTO = new ResultadoBuscaAutoCompleteDTO();
+        resultadoBuscaAutoCompleteDTO.setBusca(busca);
+        resultadoBuscaAutoCompleteDTO.setCidade(true);
+        return resultadoBuscaAutoCompleteDTO;
     }
 
-    private BuscaAutoCompleteDTO preencherHotel(String busca) {
-        BuscaAutoCompleteDTO buscaAutoCompleteDTO = new BuscaAutoCompleteDTO();
-        buscaAutoCompleteDTO.setBusca(busca);
-        buscaAutoCompleteDTO.setHotel(true);
-        return buscaAutoCompleteDTO;
+    private ResultadoBuscaAutoCompleteDTO preencherHotel(String busca) {
+        ResultadoBuscaAutoCompleteDTO resultadoBuscaAutoCompleteDTO = new ResultadoBuscaAutoCompleteDTO();
+        resultadoBuscaAutoCompleteDTO.setBusca(busca);
+        resultadoBuscaAutoCompleteDTO.setHotel(true);
+        return resultadoBuscaAutoCompleteDTO;
     }
 
     private boolean isAtingiuMaximoElementos(int quantidadeElementosRecuperados){

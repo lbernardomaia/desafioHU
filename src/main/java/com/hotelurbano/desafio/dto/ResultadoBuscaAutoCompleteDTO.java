@@ -1,9 +1,7 @@
 package com.hotelurbano.desafio.dto;
 
-public class BuscaDisponibilidadeDTO {
+public class ResultadoBuscaAutoCompleteDTO {
     private String busca;
-    private String dataInicio;
-    private String dataFim;
     private Boolean cidade = new Boolean(false);
     private Boolean hotel = new Boolean(false);
 
@@ -15,28 +13,12 @@ public class BuscaDisponibilidadeDTO {
         this.busca = busca;
     }
 
-    public String getDataInicio() {
-        return dataInicio;
-    }
-
-    public void setDataInicio(String dataInicio) {
-        this.dataInicio = dataInicio;
-    }
-
-    public String getDataFim() {
-        return dataFim;
-    }
-
-    public void setDataFim(String dataFim) {
-        this.dataFim = dataFim;
-    }
-
     public Boolean getCidade() {
-        return cidade;
+       return cidade;
     }
 
     public void setCidade(Boolean cidade) {
-        this.cidade = cidade;
+       this.cidade = cidade;
     }
 
     public Boolean getHotel() {

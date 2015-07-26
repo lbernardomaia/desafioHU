@@ -6,6 +6,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
@@ -18,20 +20,25 @@ public class HotelServiceIntTest {
     HotelService hotelService;
 
     @Test
-    public void buscar_todos(){
-        assert hotelService.buscarTodos().size() == 500;
-    }
-
-    @Test
-    public void busca_disponibilidade(){
-        String busca = "Resende";
-
+    public void busca_disponibilidade_cidade(){
         BuscaDisponibilidadeDTO buscaDisponibilidadeDTO =  new BuscaDisponibilidadeDTO();
         buscaDisponibilidadeDTO.setBusca("Resende");
         buscaDisponibilidadeDTO.setDataInicio("03/05/2015");
         buscaDisponibilidadeDTO.setDataFim("04/05/2015");
+        buscaDisponibilidadeDTO.setCidade(true);
 
         assert hotelService.buscarDisponibilidade(buscaDisponibilidadeDTO).size() == 6;
+    }
+
+    @Test
+    public void busca_disponibilidade_hotel(){
+        BuscaDisponibilidadeDTO buscaDisponibilidadeDTO =  new BuscaDisponibilidadeDTO();
+        buscaDisponibilidadeDTO.setBusca("Am Romerweg");
+        buscaDisponibilidadeDTO.setDataInicio("03/05/2015");
+        buscaDisponibilidadeDTO.setDataFim("04/05/2015");
+        buscaDisponibilidadeDTO.setHotel(true);
+
+        assert hotelService.buscarDisponibilidade(buscaDisponibilidadeDTO).size() == 1;
     }
 
     @Test
@@ -45,11 +52,20 @@ public class HotelServiceIntTest {
     }
 
     @Test
-    public void busca_auto_complete_por_cidade_rio_de_janeiro(){
-        String busca = "Rio de Janeiro";
+    public void busca_auto_complete_por_cidade_itaguai_sem_acento(){
+        String busca = "itaguaI";
         assert hotelService.buscarParaAutoComplete(busca).size() == 1;
     }
 
+    @Test
+    public void busca_auto_complete_por_hotel(){
+        String busca = "Comfort Inn North";
+        assert hotelService.buscarParaAutoComplete(busca).size() == 1;
+    }
 
-
+    @Test
+    public void busca_auto_complete_por_cidade_e_hotel(){
+        String busca = "Mar";
+        assert hotelService.buscarParaAutoComplete(busca).size() == 5;
+    }
 }
