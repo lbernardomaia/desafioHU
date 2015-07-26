@@ -1,25 +1,42 @@
 package com.hotelurbano.desafio.controller;
 
+import com.hotelurbano.desafio.dto.BuscaAutoCompleteDTO;
+import com.hotelurbano.desafio.dto.BuscaDisponibilidadeDTO;
 import com.hotelurbano.desafio.model.Hotel;
 import com.hotelurbano.desafio.service.HotelService;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
 
 @RestController
-public class HotelController {
+public class HotelController implements InitializingBean {
 
     @Autowired
     private HotelService hotelService;
 
     @RequestMapping(value="/buscaDisponibilidade",
-                    method = RequestMethod.GET,
-                    produces = "application/json")
-    public Collection<Hotel> buscaDisponibilidade(String busca, String dataInicio, String dataFim) {
-        return hotelService.buscarDisponibilidade(busca, dataInicio, dataFim);
+                    method = RequestMethod.POST,
+                    produces = "application/json",
+                    consumes = "application/json")
+    @ResponseBody
+    public Collection<Hotel> buscaDisponibilidade(@RequestBody BuscaDisponibilidadeDTO buscaDisponibilidadeDTO) {
+        return hotelService.buscarDisponibilidade(buscaDisponibilidadeDTO);
+    }
+
+    @RequestMapping(value="/buscaAutoComplete",
+            method = RequestMethod.POST,
+            produces = "application/json",
+            consumes = "application/json")
+    @ResponseBody
+    public Collection<BuscaAutoCompleteDTO> buscaAutoComplete(@RequestBody String busca) {
+        return hotelService.buscarParaAutoComplete("Araruama");
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        hotelService.popularCacheCidadeHoteis();
     }
 }

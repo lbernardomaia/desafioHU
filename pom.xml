@@ -51,6 +51,7 @@
 	</dependencies>
 
 	<properties>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<start-class>com.hotelurbano.desafio.Application</start-class>
 		<java.version>1.8</java.version>
