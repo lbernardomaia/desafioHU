@@ -15,14 +15,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class Conexao {
 
-//    @Value("${mongodb.host}")
-    private String host = "localhost";
+    @Value("${mongodb.host}")
+    private String host;
 
-//    @Value("${mongodb.port}")
-    private String port = "27017";
+    @Value("${mongodb.port}")
+    private String port;
 
-//    @Value("${mongodb.banco}")
-    private String banco = "desafiohu";
+    @Value("${mongodb.banco}")
+    private String banco;
 
     public MongoClient getConexao(){
         MongoClientOptions options = MongoClientOptions.builder()
