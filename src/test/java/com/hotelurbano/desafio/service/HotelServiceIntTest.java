@@ -31,11 +31,33 @@ public class HotelServiceIntTest {
     }
 
     @Test
+    public void busca_disponibilidade_cidade_sem_data(){
+        BuscaDisponibilidadeDTO buscaDisponibilidadeDTO =  new BuscaDisponibilidadeDTO();
+        buscaDisponibilidadeDTO.setBusca("Resende");
+        buscaDisponibilidadeDTO.setDataInicio("");
+        buscaDisponibilidadeDTO.setDataFim("");
+        buscaDisponibilidadeDTO.setCidade(true);
+
+        assert hotelService.buscarDisponibilidade(buscaDisponibilidadeDTO).size() == 8;
+    }
+
+    @Test
     public void busca_disponibilidade_hotel(){
         BuscaDisponibilidadeDTO buscaDisponibilidadeDTO =  new BuscaDisponibilidadeDTO();
         buscaDisponibilidadeDTO.setBusca("Am Romerweg");
         buscaDisponibilidadeDTO.setDataInicio("03/05/2015");
         buscaDisponibilidadeDTO.setDataFim("04/05/2015");
+        buscaDisponibilidadeDTO.setHotel(true);
+
+        assert hotelService.buscarDisponibilidade(buscaDisponibilidadeDTO).size() == 1;
+    }
+
+    @Test
+    public void busca_disponibilidade_hotel_sem_data(){
+        BuscaDisponibilidadeDTO buscaDisponibilidadeDTO =  new BuscaDisponibilidadeDTO();
+        buscaDisponibilidadeDTO.setBusca("Am Romerweg");
+        buscaDisponibilidadeDTO.setDataInicio("");
+        buscaDisponibilidadeDTO.setDataFim("");
         buscaDisponibilidadeDTO.setHotel(true);
 
         assert hotelService.buscarDisponibilidade(buscaDisponibilidadeDTO).size() == 1;
