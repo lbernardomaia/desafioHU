@@ -1,6 +1,6 @@
-#ConfiguraÁ„o ambiente DesafioHU
+Ôªø#Configura√ß√£o ambiente DesafioHU
 
-A configuraÁ„o do meu ambiente de desenvolvimento foi a seguinte:
+A configura√ß√£o do meu ambiente de desenvolvimento foi a seguinte:
 
  - JDK7 (http://www.oracle.com/technetwork/pt/java/javase/downloads/jdk7-downloads-1880260.html)
  - Apache Maven 3.3.3 (https://maven.apache.org/download.cgi)
@@ -8,21 +8,21 @@ A configuraÁ„o do meu ambiente de desenvolvimento foi a seguinte:
 
 ***Sobre o MongoDB:*** 
 
-	A base do desafioHU est· em anexo na aplicaÁ„o em /desafioHU/src/main/resources/databaseMongoDB
+	A base do desafioHU est√° em anexo na aplica√ß√£o em /desafioHU/src/main/resources/databaseMongoDB
 	
-	Os arquivos que est„o no db.rar (desafiohu.0 e desafiohu.ns) deve ser colocados em /data/db(caminho default dos databases) que È o local aonde MongoDB ir· ler esses arquivos.
+	Os arquivos que est√£o no db.rar (desafiohu.0 e desafiohu.ns) deve ser colocados em /data/db(caminho default dos databases) que √© o local aonde MongoDB ir√° ler esses arquivos.
 	
-	ApÛs isso, inicie o serviÁo do mongodb /MongoDB/Server/3.0/bin/mongod.exe (Ou equivalente dependendo do SO)
+	Ap√≥s isso, inicie o servi√ßo do mongodb /MongoDB/Server/3.0/bin/mongod.exe (Ou equivalente dependendo do SO)
 
-***Comandos a serem executados para rodar a aplicaÁ„o:***  
+***Comandos a serem executados para rodar a aplica√ß√£o:***  
 	
 	.
 	.
 	.
 	
-	Para acessar a aplicaÁ„o deve acessar a url: http://localhost:8034/desafioHU/
+	Para acessar a aplica√ß√£o deve acessar a url: http://localhost:8034/desafioHU/
 	
-	Os serviÁos est„o disponÌveis da seguinte forma:
+	Os servi√ßos est√£o dispon√≠veis da seguinte forma:
 	
 	Busca Disponibilidade
 	http://localhost:8034/desafioHU/buscaDisponibilidade
@@ -38,12 +38,12 @@ A configuraÁ„o do meu ambiente de desenvolvimento foi a seguinte:
 			Method: Post
 			{"busca":"Araruama"}
 
-***ConsideraÁıes finais:*** 
+***Considera√ß√µes finais:*** 
 
-	 O arquivo /desafioH/src/main/resources/application.properties e o /desafioHU/src/test/resources/application.properties, contÈm informaÁıes
-	 sobre o local aonde est„o configuradas as portas do MongoDB ou em qual portar o servidor ir· levantar a aplicaÁ„o.
+	 O arquivo /desafioH/src/main/resources/application.properties e o /desafioHU/src/test/resources/application.properties, cont√©m informa√ß√µes
+	 sobre o local aonde est√£o configuradas as portas do MongoDB ou em qual portar o servidor ir√° levantar a aplica√ß√£o.
 	 
-	 Qualquer configuraÁ„o diferentes dos itens a seguir devem ser alteradas nos arquivos informados acima:
+	 Qualquer configura√ß√£o diferentes dos itens a seguir devem ser alteradas nos arquivos informados acima:
 	 
 	 server.port = 8034
  	 server.contextPath=/desafioHU
