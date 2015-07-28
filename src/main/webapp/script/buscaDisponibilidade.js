@@ -40,7 +40,7 @@ $(function() {
         source: function( request, response ) {
             $.ajax({
                 type: "post",
-                url: "/buscaAutoComplete",
+                url: "buscaAutoComplete",
                 contentType: "application/json",
                 dataType: "json",
                 data: JSON.stringify( { "busca": request.term } ),
@@ -70,7 +70,7 @@ $(function() {
     $( "#formBuscaDisponibilidade").submit(function() {
         $.ajax({
             type: "post",
-            url: "/buscaDisponibilidade",
+            url: "buscaDisponibilidade",
             contentType: "application/json",
             dataType: "json",
             data: JSON.stringify( { "busca" : labelSelecionada.label,
