@@ -20,6 +20,8 @@ A configuração do meu ambiente de desenvolvimento foi a seguinte:
 
 ***Comandos a serem executados:***  
 	
+	git clone https://github.com/lbernardomaia/desafioHU
+	cd .\desafioHU
 	mvn clean install
 	mvn spring-boot:run
 	
@@ -44,6 +46,7 @@ A configuração do meu ambiente de desenvolvimento foi a seguinte:
 		
 	Busca AutoComplete
 	http://localhost:8034/desafioHU/buscaAutoComplete	
+	
 		Ex:
 			Method: Post
 			{"busca":"Araruama"}
