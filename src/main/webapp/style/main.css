@@ -1,0 +1,73 @@
+body {
+    padding-top: 50px;
+}
+.starter-template {
+    padding: 40px 15px;
+    text-align: center;
+}
+
+h1{
+    background-color: #40BFFB;
+    color: #fff;
+}
+
+.subtitulo{
+    color: #40BFFB;
+}
+
+.negrito {
+    font-weight: bold;
+}
+
+.aondeFicar{
+    color: #656565;
+    font-weight: bold;
+    font-size: 13px;
+    padding: 0px 95px 0px 0px;
+}
+
+.quando{
+    color: #656565;
+    font-weight: bold;
+    font-size: 13px;
+    padding: 0px 38px 0px 0px;
+}
+
+
+.left-inner-addon {
+position: relative;
+}
+
+.left-inner-addon input {
+    padding-left: 25px;
+}
+
+.left-inner-addon i {
+    position: absolute;
+    padding: 1px 1px;
+}
+
+.semData {
+    font-size: 10.5px;
+    padding: 0px 70px 7px 0px;
+}
+
+.bordaColuna{
+    border: 1px solid;
+}
+
+input:invalid {
+    border: 1px solid red;
+}
+
+input:valid {
+    border: 1px solid green;
+}
+
+.esconder{
+    display: none;
+}
+
+.table th {
+    text-align: center;
+}

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt" ng-app>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/img/favicon4.ico">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Desafio HU</title>
+
+    <!-- Bootstrap -->
+     <link href="vendor/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="vendor/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="vendor/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+      <script src="/app/js/busca.js"></script>
+      <link rel="stylesheet" href="/vendor/jquery-ui-1.11.4.custom/jquery-ui.css">
+      <script src="/vendor/jquery-ui-1.11.4.custom/external/jquery/jquery.js"></script>
+      <script src="/vendor/jquery-ui-1.11.4.custom/jquery-ui.js"></script>
+      <link rel="stylesheet" type="text/css" href="/style/flaticon.css">
+      <link rel="stylesheet" type="text/css" href="/style/main.css">
+      <script src="/script/main.js" charset="UTF-8"></script>
+      <script src="/script/buscaDisponibilidade.js" charset="UTF-8"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Desafio HU</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+
+      <div class="starter-template">
+
+        <div class="row">
+          <div class="col-md-3">
+
+          </div>
+
+          <div class="col-md-6 bordaColuna">
+              <form id="formBuscaDisponibilidade" action="javascript:void(0);">
+                   <h1><i class="flaticon-beds2"></i>HOTÉIS</h1>
+
+                   <p class="subtitulo"><span class="negrito">+ 170.000 hotéis</span>, pousadas e resorts no mundo todo.</p>
+
+                  <div class="col-md-6">
+                    <label for="busca" class="aondeFicar">Quer ficar onde?</label>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="busca" class="quando">Quando? (Entrada e Saída)</label>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="left-inner-addon">
+                        <i class="flaticon-location76"></i>
+                        <input id="busca" class=".busca" title="O campo hotéis não poderá ficar vazio" required placeholder="cidade ou hotel">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="left-inner-addon">
+
+                      <i class="flaticon-calendar189"></i>
+                      <input type="text" id="dataInicio" title="O campo de ida não poderá ficar vazio" required size="6" placeholder="entrada">
+
+                      <i class="flaticon-calendar189"></i>
+                      <input type="text" id="dataFim" title="O campo de volta não poderá ficar vazio" required size="6" placeholder="saída">
+                    </div>
+                    <div class="semData">
+                      <input type="checkbox" id="semData" value=""/>Ainda não defini as datas
+                    </div>
+                  </div>
+
+                  <p class="lead">
+                      <button type="submit" id="buscaDisponibilidade" class="btn btn-warning"><i class="flaticon-search100"></i>Buscar</button>
+                  </p>
+              </form>
+              <span id="listaHoteisDisponiveis" class="esconder">
+                 <h4>Hotéis Disponíveis</h4>
+                <table class="table table-hover">
+                  <thead>
+                  <tr>
+                    <th>#</th>
+                    <th><span class="negrito">Cidade</span></th>
+                    <th><span class="negrito">Hotel</span></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+                </table>
+              </span>
+            <span id="mensagemSemResultado" class="esconder">
+              <h4>Desculpe, mas já reservamos todas as ofertas nesse período, por favor refaça sua busca com outras datas.</h4>
+            </span>
+          </div>
+
+          <div class="col-md-3">
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <script src="vendor/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+  </body>
+</html>

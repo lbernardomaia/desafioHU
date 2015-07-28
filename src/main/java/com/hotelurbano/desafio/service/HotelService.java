@@ -92,14 +92,14 @@ public class HotelService {
 
     private ResultadoBuscaAutoCompleteDTO preencherCidade(String busca) {
         ResultadoBuscaAutoCompleteDTO resultadoBuscaAutoCompleteDTO = new ResultadoBuscaAutoCompleteDTO();
-        resultadoBuscaAutoCompleteDTO.setBusca(busca);
+        resultadoBuscaAutoCompleteDTO.setLabel(busca);
         resultadoBuscaAutoCompleteDTO.setCidade(true);
         return resultadoBuscaAutoCompleteDTO;
     }
 
     private ResultadoBuscaAutoCompleteDTO preencherHotel(String busca) {
         ResultadoBuscaAutoCompleteDTO resultadoBuscaAutoCompleteDTO = new ResultadoBuscaAutoCompleteDTO();
-        resultadoBuscaAutoCompleteDTO.setBusca(busca);
+        resultadoBuscaAutoCompleteDTO.setLabel(busca);
         resultadoBuscaAutoCompleteDTO.setHotel(true);
         return resultadoBuscaAutoCompleteDTO;
     }

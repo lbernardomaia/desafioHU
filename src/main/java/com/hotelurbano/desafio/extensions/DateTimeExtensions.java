@@ -12,15 +12,19 @@ public final class DateTimeExtensions {
     }
 
     public static final DateTime stringToISODate(String data){
-        String[] dataSplit = data.split("/");
-        dataSplit[0] = dataSplit[0].length() == 1 ? "0" + dataSplit[0] :  dataSplit[0];
-        dataSplit[1] = dataSplit[1].length() == 1 ? "0" + dataSplit[1] :  dataSplit[1];
-        dataSplit[2] = dataSplit[2].length() == 1 ? "0" + dataSplit[2] :  dataSplit[2];
+        if (!data.equals("")){
+            String[] dataSplit = data.split("/");
+            dataSplit[0] = dataSplit[0].length() == 1 ? "0" + dataSplit[0] :  dataSplit[0];
+            dataSplit[1] = dataSplit[1].length() == 1 ? "0" + dataSplit[1] :  dataSplit[1];
+            dataSplit[2] = dataSplit[2].length() == 1 ? "0" + dataSplit[2] :  dataSplit[2];
 
-        String dataStringISODate = dataSplit[2] + "-" + dataSplit[1] + "-" + dataSplit[0] + "T00:00:00.000Z";
-        DateTimeFormatter parser = ISODateTimeFormat.dateTime();
-        DateTime result = parser.parseDateTime(dataStringISODate);
-        return result;
+            String dataStringISODate = dataSplit[2] + "-" + dataSplit[1] + "-" + dataSplit[0] + "T00:00:00.000Z";
+            DateTimeFormatter parser = ISODateTimeFormat.dateTime();
+            DateTime result = parser.parseDateTime(dataStringISODate);
+            return result;
+        }else{
+            return null;
+        }
     }
 
     public static final DateTime dateToDateTime(Date data){

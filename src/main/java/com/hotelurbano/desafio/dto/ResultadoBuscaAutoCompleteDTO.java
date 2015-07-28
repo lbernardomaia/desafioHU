@@ -1,16 +1,16 @@
 package com.hotelurbano.desafio.dto;
 
 public class ResultadoBuscaAutoCompleteDTO {
-    private String busca;
+    private String label;
     private Boolean cidade = new Boolean(false);
     private Boolean hotel = new Boolean(false);
 
-    public String getBusca() {
-        return busca;
+    public String getLabel() {
+        return label;
     }
 
-    public void setBusca(String busca) {
-        this.busca = busca;
+    public void setLabel(String label) {
+        this.label = label;
     }
 
     public Boolean getCidade() {

@@ -43,10 +43,16 @@ public class HotelDAO {
 
         BasicDBObject query = new BasicDBObject();
         query.put(campoBusca, new BasicDBObject("$regex", ".*\\Q" + busca + "\\E.*").append("$options", "i"));
-        query.put("disponibilidade", new BasicDBObject("$elemMatch",
-                new BasicDBObject("disponivel", 1)
-                        .append("data", new BasicDBObject("$gte", dataInicio.toDate())
-                                .append("$lte", dataFim.toDate()))));
+
+        if (dataInicio != null && dataFim != null){
+            query.put("disponibilidade", new BasicDBObject("$elemMatch",
+                    new BasicDBObject("disponivel", 1)
+                            .append("data", new BasicDBObject("$gte", dataInicio.toDate())
+                                    .append("$lte", dataFim.toDate()))));
+        }else{
+            query.put("disponibilidade", new BasicDBObject("$elemMatch",
+                    new BasicDBObject("disponivel", 1)));
+        }
 
         BasicDBObject orderBy = new BasicDBObject();
         orderBy.put("cidade", 1);
