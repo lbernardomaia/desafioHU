@@ -9,6 +9,13 @@ import java.util.Date;
 
 public class DateTimeExtensionsUniTest {
 
+    @Test
+    public void data_string_vazia_para_dateTime() {
+        DateTime isoDateConvertida = DateTimeExtensions.stringToISODate("");
+
+        assert isoDateConvertida == null;
+    }
+
    @Test
    public void data_string_para_dateTime() {
        DateTime isoDateConvertida = DateTimeExtensions.stringToISODate("4/5/2015");
